@@ -1,4 +1,4 @@
-use apache_avro::schema::{Name, Schema};
+use apache_avro::schema::{Name, RecordSchema, Schema};
 use apache_avro::types::{Record, Value};
 use apache_avro::{to_avro_datum, to_value};
 use dashmap::DashMap;
@@ -155,7 +155,7 @@ pub(crate) fn item_to_bytes(
 
 pub(crate) fn get_name(schema: &Schema) -> Option<Name> {
     match schema {
-        Schema::Record { name: n, .. } => Some(n.clone()),
+        Schema::Record(RecordSchema { name: n, .. }) => Some(n.clone()),
         _ => None,
     }
 }
